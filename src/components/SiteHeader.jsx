@@ -74,11 +74,6 @@ export default function SiteHeader({ variant = 'standard', brandSuffix = '' }) {
     <header className={`site-header site-header--${variant}`}>
       <FabNav menuOpen={open} onToggleMenu={() => setOpen((value) => !value)} logoVisible={!brandInView} />
       <div className="site-header__inner">
-        <button className="site-header__menu" type="button" onClick={() => setOpen((value) => !value)} aria-expanded={open} aria-controls="site-drawer">
-          <span className="hidden-visually">Toggle navigation</span>
-          <span aria-hidden="true">☰</span>
-        </button>
-
         <Link to="/" className="site-header__brand" aria-label="Aftab Muhammad home" ref={brandRef}>
           <span className="site-header__brand-main">AFTAB MHD</span>
           {brandSuffix ? <span className="site-header__brand-suffix">{brandSuffix}</span> : null}
@@ -95,7 +90,9 @@ export default function SiteHeader({ variant = 'standard', brandSuffix = '' }) {
             <CSSTransition key={rightAction.href} timeout={240} classNames="header-context">
               <Link to={rightAction.href} className="badge-button site-header__cta">
                 {rightAction.label}
-                <span aria-hidden="true" className="site-header__cta-icon">🚀</span>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="site-header__cta-icon">
+                  <path d="M1 13L13 1M13 1H3M13 1V11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </Link>
             </CSSTransition>
           </SwitchTransition>

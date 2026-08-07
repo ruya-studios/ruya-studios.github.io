@@ -1,14 +1,9 @@
 .fab-nav {
   position: fixed;
-  inset: 0 auto 0 0;
-  z-index: 40;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
+  top: 16px;
+  left: 16px;
+  z-index: 100;
   pointer-events: none;
-  height: 100dvh;
-  padding: 16px 0 16px 16px;
 }
 
 .fab-nav__toggle,
@@ -23,7 +18,9 @@
   place-items: center;
   border: 1px solid var(--ink);
   background: var(--bg);
+  color: var(--ink);
   font-size: 24px;
+  cursor: pointer;
   transition: transform .4s cubic-bezier(.19,1,.22,1), color .4s cubic-bezier(.19,1,.22,1), background-color .4s cubic-bezier(.19,1,.22,1);
 }
 
@@ -37,28 +34,35 @@
 }
 
 .fab-nav__logo {
-  transform: translateX(-100%);
-  transition: transform .8s cubic-bezier(.19,1,.22,1), opacity .35s ease;
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 100;
+  transform: translateY(-100%);
+  transition: transform .6s cubic-bezier(.19,1,.22,1), opacity .35s ease;
   opacity: 0;
+  pointer-events: none;
 }
 
 .fab-nav__logo.is-visible {
-  transform: translateX(0);
+  transform: translateY(0);
   opacity: 1;
+  pointer-events: auto;
 }
 
 .fab-nav__logo-link {
   display: inline-flex;
   align-items: center;
   min-height: 58px;
-  padding: 0 18px;
+  padding: 0 20px;
   border: 1px solid var(--ink);
   color: var(--surface);
   background: var(--ink);
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 800;
-  letter-spacing: -.08em;
+  letter-spacing: -.06em;
+  text-decoration: none;
   transition: transform .4s cubic-bezier(.19,1,.22,1), color .4s cubic-bezier(.19,1,.22,1), background-color .4s cubic-bezier(.19,1,.22,1);
 }
 
@@ -78,19 +82,25 @@
 
 @media (max-width: 720px) {
   .fab-nav {
-    padding: 10px 0 10px 10px;
+    top: 10px;
+    left: 10px;
   }
 
-  .fab-nav__toggle,
-  .fab-nav__logo-link {
-    width: 50px;
-    min-height: 50px;
+  .fab-nav__logo {
+    top: 10px;
+    right: 10px;
+  }
+
+  .fab-nav__toggle {
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
   }
 
   .fab-nav__logo-link {
-    width: auto;
+    min-height: 48px;
     padding: 0 14px;
-    font-size: 18px;
+    font-size: 16px;
   }
 }
 

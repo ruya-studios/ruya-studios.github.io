@@ -1,111 +1,52 @@
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import useEmblaCarousel from 'embla-carousel-react';
-import AutoScroll from 'embla-carousel-auto-scroll';
-import PlaceholderMedia from './PlaceholderMedia';
-import useInView from '../hooks/useInView';
 import usePrefersReducedMotion from '../hooks/usePrefersReducedMotion';
-import { projects } from '../data/projects';
-import { carouselCardBySlug } from '../data/workMedia';
 import './WorkCarousel.css';
 
-function padTo(list, length) {
-  if (!list.length) return [];
+const cardImages = [
+  { id: '1', src: new URL('../../Carousel Cards/1.png', import.meta.url).href, title: 'Project 1' },
+  { id: '2', src: new URL('../../Carousel Cards/2.png', import.meta.url).href, title: 'Project 2' },
+  { id: '3', src: new URL('../../Carousel Cards/3.png', import.meta.url).href, title: 'Project 3' },
+  { id: '4', src: new URL('../../Carousel Cards/4.png', import.meta.url).href, title: 'Project 4' },
+  { id: '5', src: new URL('../../Carousel Cards/5.png', import.meta.url).href, title: 'Project 5' },
+  { id: '6', src: new URL('../../Carousel Cards/6.png', import.meta.url).href, title: 'Project 6' },
+];
 
-  const output = [...list];
-  while (output.length < length) {
-    output.push(list[output.length % list.length]);
-  }
-
-  return output;
-}
-
-function ShowcaseRow({ items, direction, staggerOffset = 0 }) {
+export default function WorkCarousel() {
   const prefersReducedMotion = usePrefersReducedMotion();
-  const autoScrollPlugin = useMemo(() => {
-    if (prefersReducedMotion) return [];
 
-    return [
-      AutoScroll({
-        speed: 1,
-        startDelay: 0,
-        direction,
-        stopOnFocusIn: false,
-      }),
-    ];
-  }, [direction, prefersReducedMotion]);
+  // Top row: 1.png, 2.png, 3.png, 4.png, 5.png, 6.png
+  const topRow = useMemo(() => {
+    return [...cardImages, ...cardImages];
+  }, []);
 
-  const [emblaRef] = useEmblaCarousel(
-    {
-      loop: true,
-      watchDrag: false,
-      skipSnaps: true,
-      startIndex: Math.floor(items.length / 2),
-    },
-    autoScrollPlugin,
-  );
+  // Bottom row: 2.png, 3.png, 4.png, 5.png, 6.png, 1.png
+  const bottomRow = useMemo(() => {
+    const reordered = [cardImages[1], cardImages[2], cardImages[3], cardImages[4], cardImages[5], cardImages[0]];
+    return [...reordered, ...reordered];
+  }, []);
 
   return (
-    <div className="showcase-row fx-mask embla">
-      <div className="showcase-row__viewport" ref={emblaRef}>
-        <div className="showcase-row__track">
-          {items.map((project, index) => (
-            <Link
-              key={`${project.slug}-${direction}-${index}`}
-              to={`/portfolio/${project.slug}`}
-              className="showcase-row__item"
-              style={{ animationDelay: `${staggerOffset + index * 50}ms` }}
-            >
-              <PlaceholderMedia
-                title={project.title}
-                subtitle={project.summary}
-                label={project.number}
-                toneA={project.toneA}
-                toneB={project.toneB}
-                aspect="landscape"
-                imageSrc={carouselCardBySlug[project.slug]}
-                imageAlt={`${project.title} carousel card`}
-                showContent={false}
-              />
+    <section className="work-carousel-shell" aria-label="Selected work carousel">
+      <div className={`work-carousel-row marquee-left${prefersReducedMotion ? ' is-static' : ''}`}>
+        <div className="work-carousel-track">
+          {topRow.map((card, idx) => (
+            <Link key={`top-${card.id}-${idx}`} to="/portfolio" className="work-carousel-card">
+              <img src={card.src} alt={`Work card ${card.id}`} loading="eager" />
             </Link>
           ))}
         </div>
       </div>
-    </div>
-  );
-}
 
-export default function WorkCarousel() {
-  const [sectionRef, inView] = useInView({ threshold: 0.12 });
-  const prefersReducedMotion = usePrefersReducedMotion();
-
-  const rows = useMemo(() => {
-    const ordered = projects.slice(0, 6);
-    const firstRow = padTo(ordered.slice(0, 3), 6);
-    const secondRow = padTo(ordered.slice(3), 6);
-
-    return { firstRow, secondRow };
-  }, []);
-
-  if (!inView && !prefersReducedMotion) {
-    return (
-      <section className="work-carousel-shell" ref={sectionRef} aria-label="Selected work carousel loading">
-        <div className="work-carousel-skeleton" aria-hidden="true">
-          <div className="work-carousel-skeleton__row">
-            {Array.from({ length: 4 }).map((_, index) => <div key={index} className="work-carousel-skeleton__tile" />)}
-          </div>
-          <div className="work-carousel-skeleton__row">
-            {Array.from({ length: 4 }).map((_, index) => <div key={index} className="work-carousel-skeleton__tile" />)}
-          </div>
+      <div className={`work-carousel-row marquee-right${prefersReducedMotion ? ' is-static' : ''}`}>
+        <div className="work-carousel-track">
+          {bottomRow.map((card, idx) => (
+            <Link key={`bottom-${card.id}-${idx}`} to="/portfolio" className="work-carousel-card">
+              <img src={card.src} alt={`Work card ${card.id}`} loading="eager" />
+            </Link>
+          ))}
         </div>
-      </section>
-    );
-  }
-
-  return (
-    <section className="work-carousel-shell" ref={sectionRef} aria-label="Selected work carousel">
-      <ShowcaseRow items={rows.firstRow} direction="backward" staggerOffset={0} />
-      <ShowcaseRow items={rows.secondRow} direction="forward" staggerOffset={rows.firstRow.length * 50} />
+      </div>
     </section>
   );
 }
