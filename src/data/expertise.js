@@ -1,0 +1,91 @@
+export const expertisePage = {
+  eyebrow: 'CREATIVE ✳ EXPERTISE',
+  title: 'WHAT I DO',
+  subtext: 'A solo practice that mixes software, systems, writing, and the kind of utility work that keeps projects moving.',
+  introLeft:
+    'I usually work on practical digital products and tools that need a clean user experience, a solid technical base, and a concise explanation of what they do.',
+  introRight:
+    'The list below is intentionally written as placeholder structure. It keeps the page flexible while Aftab settles the final category names and priorities.',
+  services: [
+    {
+      number: '01',
+      title: 'Web Development',
+      skills: 'Responsive build · UI implementation · Accessibility',
+      description: 'Placeholder service copy for the interactive row list.',
+      toneA: '#1e1e1e',
+      toneB: '#7f8cff',
+      label: 'WEB / UI',
+    },
+    {
+      number: '02',
+      title: 'Backend & Systems',
+      skills: 'APIs · architecture · automation',
+      description: 'Placeholder service copy for backend and systems work.',
+      toneA: '#0b0b0b',
+      toneB: '#2f6f8f',
+      label: 'SYSTEMS',
+    },
+    {
+      number: '03',
+      title: 'Automation & Tooling',
+      skills: 'Scripts · productivity · workflow design',
+      description: 'Placeholder service copy for tooling and automation.',
+      toneA: '#0b0b0b',
+      toneB: '#6b8f62',
+      label: 'TOOLS',
+    },
+    {
+      number: '04',
+      title: 'Teaching & Mentorship',
+      skills: 'Workshops · explanation · project guidance',
+      description: 'Placeholder service copy for teaching and mentoring.',
+      toneA: '#0b0b0b',
+      toneB: '#b88b46',
+      label: 'LEARNING',
+    },
+    {
+      number: '05',
+      title: 'Writing & Content',
+      skills: 'Copy support · essays · technical prose',
+      description: 'Placeholder service copy for writing-led work.',
+      toneA: '#0b0b0b',
+      toneB: '#9c6c9e',
+      label: 'WORDS',
+    },
+    {
+      number: '06',
+      title: 'Consulting',
+      skills: 'Direction · review · systems thinking',
+      description: 'Placeholder service copy for consulting engagements.',
+      toneA: '#0b0b0b',
+      toneB: '#c08d8d',
+      label: 'GUIDANCE',
+    },
+  ],
+  glance: {
+    title: 'SERVICES AT A GLANCE',
+    body: 'A compact view of the placeholder categories used across the site while the final taxonomy is still being refined.',
+  },
+  tabs: [
+    {
+      name: 'Services',
+      icon: '●',
+      body: 'Placeholder tab content for the service summary.',
+    },
+    {
+      name: 'Process',
+      icon: '◌',
+      body: 'Placeholder tab content for the process summary.',
+    },
+    {
+      name: 'Tools',
+      icon: '⌁',
+      body: 'Placeholder tab content for the tools summary.',
+    },
+    {
+      name: 'Collaboration',
+      icon: '✦',
+      body: 'Placeholder tab content for collaboration summary.',
+    },
+  ],
+};

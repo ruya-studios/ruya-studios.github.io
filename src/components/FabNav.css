@@ -1,0 +1,107 @@
+.fab-nav {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  pointer-events: none;
+  height: 100dvh;
+  padding: 16px 0 16px 16px;
+}
+
+.fab-nav__toggle,
+.fab-nav__logo-link {
+  pointer-events: auto;
+}
+
+.fab-nav__toggle {
+  display: grid;
+  width: 58px;
+  height: 58px;
+  place-items: center;
+  border: 1px solid var(--ink);
+  background: var(--bg);
+  font-size: 24px;
+  transition: transform .4s cubic-bezier(.19,1,.22,1), color .4s cubic-bezier(.19,1,.22,1), background-color .4s cubic-bezier(.19,1,.22,1);
+}
+
+.fab-nav__toggle:hover {
+  color: var(--surface);
+  background: var(--ink);
+}
+
+.fab-nav__toggle:active {
+  transform: scale(.85);
+}
+
+.fab-nav__logo {
+  transform: translateX(-100%);
+  transition: transform .8s cubic-bezier(.19,1,.22,1), opacity .35s ease;
+  opacity: 0;
+}
+
+.fab-nav__logo.is-visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.fab-nav__logo-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 58px;
+  padding: 0 18px;
+  border: 1px solid var(--ink);
+  color: var(--surface);
+  background: var(--ink);
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -.08em;
+  transition: transform .4s cubic-bezier(.19,1,.22,1), color .4s cubic-bezier(.19,1,.22,1), background-color .4s cubic-bezier(.19,1,.22,1);
+}
+
+.fab-nav__logo-link:hover {
+  color: var(--ink);
+  background: var(--bg);
+}
+
+.fab-nav__logo-link:active {
+  transform: scale(.85);
+}
+
+.fab-nav--open .fab-nav__toggle {
+  color: var(--surface);
+  background: var(--ink);
+}
+
+@media (max-width: 720px) {
+  .fab-nav {
+    padding: 10px 0 10px 10px;
+  }
+
+  .fab-nav__toggle,
+  .fab-nav__logo-link {
+    width: 50px;
+    min-height: 50px;
+  }
+
+  .fab-nav__logo-link {
+    width: auto;
+    padding: 0 14px;
+    font-size: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fab-nav__toggle,
+  .fab-nav__logo,
+  .fab-nav__logo-link {
+    transition: none;
+  }
+
+  .fab-nav__logo {
+    transform: none;
+  }
+}
